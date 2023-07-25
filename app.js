@@ -14,15 +14,44 @@ request({url:url, json:true}, function (error, response) {
 });
 
 const showWeatherForcast = (current) => {
-    console.log(current.weather_descriptions[0]+': Current temperature is '+current.temperature+' degree and its feels like ' + current.feelslike);
-}
+    
+    let weatherForcast = current.weather_descriptions[0]+': Current temperature is '+current.temperature+' degree and its feels like ' + current.feelslike;
 
+    console.log(weatherForcast);    //Sunny: Current temperature is 72 degree and its feels like 72
+}
 
 // mapBox api
 
 // https://api.mapbox.com/geocoding/v5/mapbox.places/{search_text}.json
 
 // pk.eyJ1Ijoiam9obmRlbzg3ODkiLCJhIjoiY2xrNGk3eDdmMTFnMjNkbXBieGVsaWs5ZiJ9.fUo7HjRgsD5gyJgJDAJ99A
+
+//GeoCoding
+/*  
+- Address(enter by user) = {lati, long} from map-box -> { weather } from weatherStack   
+- we do forward geocoding, we provide address and get latitude and longitude.
+- visit https://docs.mapbox.com/api/search/geocoding/ and copy forward geocoding -api
+    ie. https://api.mapbox.com/geocoding/v5/{endpoint}/{search_text}.json
+    @params
+    endpoint = mapbox.place, search_text = address_name
+
+    # Find Los Angeles:
+    https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1Ijoiam9obmRlbzg3ODkiLCJhIjoiY2xrNGk3eDdmMTFnMjNkbXBieGVsaWs5ZiJ9.fUo7HjRgsD5gyJgJDAJ99A
+
+    1.fetch features.center or feature.geometry to get {lati, long}
+    2. set limit = 1 (default its 5 and max=30)
+    https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1Ijoiam9obmRlbzg3ODkiLCJhIjoiY2xrNGk3eDdmMTFnMjNkbXBieGVsaWs5ZiJ9.fUo7HjRgsD5gyJgJDAJ99A&limit=1;
+*/
+
+/* Task: Print the lat/long for Los Angeles
+// 1. Fire off a new request to the URL explored in browser
+// 2. Have the request module parse it as JSON
+// 3. Print both the latitude and longitude to the terminal
+// 4. Test your work!
+*/
+
+const geocoding = '';
+
 
 /*
 As, This package has been deprecated 
