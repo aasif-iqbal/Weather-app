@@ -1,9 +1,7 @@
-const request = require('request');
 const geocode = require('./utiles/geocode');
+const forecast = require('./utiles/forecast');
 
 // const url = 'http://api.weatherstack.com/current?access_key=22df95c17943bd664876c9c59c1620d1&query=37.8267,-122.4233';
-
-
 
 // mapBox api
 
@@ -29,7 +27,7 @@ const geocode = require('./utiles/geocode');
 */
 
 // Weather-api
-
+/*
 // convert temperature to units=f, temperature: Fahrenheit
 const url = 'http://api.weatherstack.com/current?access_key=3f53595038b7f91a7234c7def7fcbeaf&query=37.8267,-122.4233&units=f';
 
@@ -48,7 +46,7 @@ const showWeatherForcast = (current) => {
 
     // console.log(weatherForcast);//Sunny: Current temperature is 72 degree and its feels like 72
 }
-
+*/
 
 
 /* Task: Print the lat/long for Los Angeles
@@ -81,11 +79,29 @@ request({uri:geocoding, json:true}, function(error, response){
 });
 */
 
+let address = process.argv[2];
 
-geocode('delhi', (error, data) => {
-    console.log('Error::', error);
-    console.log('Data::', data);
-});
+if(address){
+
+    geocode(address, (error, data) => {
+        
+        if(error){
+            return console.log(error);
+        }
+
+        forecast(data.latitude, data.longitude, (error, forecastData) => {
+            if(error){
+                return console.log(error);
+            }
+            console.log('location: ', data.location);
+            console.log('forecast: ', forecastData);
+        });
+    });
+}else{
+    console.log('Please, Provide an address');
+}
+
+//  node app.js 'new delhi'
 
 /*
 As, This package has been deprecated 
